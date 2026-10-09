@@ -27,11 +27,12 @@ export class Game {
   }
 
   static create(input: CreateGameInput): Game {
-    if (input.name.trim() === "") {
+    const name = input.name.trim();
+    if (name === "") {
       throw new Error("Nome é obrigatório");
     }
 
-    const game = new Game(input.name, "want_to_play");
+    const game = new Game(name, "want_to_play");
     game.genre = input.genre ?? null;
     game.releaseDate = input.releaseDate ?? null;
     game.priceInCents = input.priceInCents ?? null;
