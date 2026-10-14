@@ -41,6 +41,20 @@ describe("Game", () => {
   it("ADD-5: Espaços antes e depois do nome são removidos", () => {
     const game = Game.create({ name: "  Hades  " });
     expect(game.name).toBe("Hades");
-  })
+  });
+
+  it("ADD-12: Nomes com mais de 50 caracteres são recusados", () => {
+    expect(() => Game.create({ name: "A".repeat(51) })).toThrow();
+  });
+
+  it("ADD-12(II): Nomes com até 50 caracteres são permitidos", () => {
+    const game = Game.create({ name: "A".repeat(50) });
+    expect(game.name.length).toBe(50);
+  });
+
+  it("ADD-12(III): Espaços nas pontas não contam para o limite", () => {
+    const game = Game.create({ name: "  " + "A".repeat(50) + "  " });
+    expect(game.name.length).toBe(50);
+  });  
 
 });
