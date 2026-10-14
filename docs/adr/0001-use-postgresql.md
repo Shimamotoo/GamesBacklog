@@ -1,4 +1,6 @@
-# ADR-DATABASE: Usar PostgreSQL como banco de dados
+# ADR-0001: Usar PostgreSQL como banco de dados
+
+**Status: Aceito**
 
 ## Contexto
 A V1 do Game Backlog precisa persistir jogos e o backlog do usuário em um
@@ -12,7 +14,7 @@ Usar PostgreSQL.
 ## Alternativas consideradas
 - **SQL Server:** funcional para o nosso caso, mas melhor integrado ao
   ecossistema .NET, com licenciamento por edição e hospedagem mais restrita.
-- **PostgreSQL:** mais simples para a V1, mas limita a evolução para
+- **SQLite:** mais simples para a V1, mas limita a evolução para
   multiusuário e hospedagem pública.
 
 ## Consequências

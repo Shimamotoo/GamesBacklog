@@ -1,5 +1,7 @@
 # ADR-0005: Adotar TDD como regra do projeto
 
+**Status: Aceito**
+
 ## Contexto
 O projeto é um laboratório de estudo e segue Spec-Driven Development. A
 spec da V1 tem 40 critérios que precisam virar testes automatizados.

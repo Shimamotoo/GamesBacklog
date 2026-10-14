@@ -1,5 +1,7 @@
 # ADR-0002: Arquitetura em camadas
 
+**Status: Aceito**
+
 ## Contexto
 O projeto é um laboratório de estudo de engenharia de software. As regras
 da spec são de tipos diferentes (do jogo, da lista, de fluxo) e precisam
