@@ -13,6 +13,8 @@ export type CreateGameInput = {
   note?: string;
 };
 
+const MAX_NAME_LENGTH = 50;
+
 export class Game {
   readonly name: string;
   readonly status: GameStatus;
@@ -30,6 +32,10 @@ export class Game {
     const name = input.name.trim();
     if (name === "") {
       throw new Error("Nome é obrigatório");
+    }
+
+    if (name.length > MAX_NAME_LENGTH) {
+      throw new Error(`Nome não pode ter mais de ${MAX_NAME_LENGTH} caracteres`);
     }
 
     const game = new Game(name, "want_to_play");
