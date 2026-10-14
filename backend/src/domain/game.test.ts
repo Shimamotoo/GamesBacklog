@@ -57,4 +57,22 @@ describe("Game", () => {
     expect(game.name.length).toBe(50);
   });  
 
+  it("ADD-13: Observação com mais de 300 caracteres é recusada", () => {
+    expect(() => Game.create({ name: "Hades", note: "A".repeat(301) })).toThrow();
+  });
+
+  it("ADD-13(II): Observação só com espaços vira não informada", () => {
+    const game = Game.create({ name: "Hades", note: "      " });
+    expect(game.note).toBeNull();
+  });
+
+  it("ADD-14: Gênero com mais de 30 caracteres é recusado", () => {
+    expect(() => Game.create({ name: "Hades", genre: "A".repeat(31) })).toThrow();
+  });
+
+  it("ADD-14(II): Gênero com espaços nas pontas é salvo sem eles", () => {
+    const game = Game.create({ name: "Hades", genre: "  Terror  " });
+    expect(game.genre).toBe("Terror");
+  });
+
 });
