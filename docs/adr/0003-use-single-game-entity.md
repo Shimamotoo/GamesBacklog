@@ -1,5 +1,7 @@
 # ADR-0003: Uma única entidade, com listas privadas por usuário
 
+**Status: Aceito**
+
 ## Contexto
 O README original separava "catálogo" e "backlog pessoal". Na V1 os jogos
 são cadastrados manualmente, sem API externa, e a intenção é que cada

@@ -1,5 +1,7 @@
 # ADR-0004: Stack: TypeScript, Fastify, Kysely e Vitest
 
+**Status: Aceito**
+
 ## Contexto
 Backend em TypeScript (Node) com interface mínima em React. O projeto quer
 manter contato com SQL e praticar design, então as ferramentas não devem
