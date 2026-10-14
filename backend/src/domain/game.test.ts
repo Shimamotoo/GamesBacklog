@@ -38,4 +38,9 @@ describe("Game", () => {
     expect(game.note).toBe("Texto");
   });
 
+  it("ADD-5: Espaços antes e depois do nome são removidos", () => {
+    const game = Game.create({ name: "  Hades  " });
+    expect(game.name).toBe("Hades");
+  })
+
 });
