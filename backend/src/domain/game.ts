@@ -14,6 +14,13 @@ export type CreateGameInput = {
 };
 
 const MAX_NAME_LENGTH = 50;
+const MAX_GENRE_LENGTH = 30;
+const MAX_NOTE_LENGTH = 300;
+
+function cleanOptionalText(value: string | undefined): string | null {
+  const cleaned = value?.trim() ?? "";
+  return cleaned === "" ? null : cleaned;
+}
 
 export class Game {
   readonly name: string;
@@ -33,16 +40,25 @@ export class Game {
     if (name === "") {
       throw new Error("Nome é obrigatório");
     }
-
     if (name.length > MAX_NAME_LENGTH) {
       throw new Error(`Nome não pode ter mais de ${MAX_NAME_LENGTH} caracteres`);
     }
 
+    const genre = cleanOptionalText(input.genre);
+    if (genre !== null && genre.length > MAX_GENRE_LENGTH) {
+      throw new Error(`Gênero não pode ter mais de ${MAX_GENRE_LENGTH} caracteres`);
+    }
+
+    const note = cleanOptionalText(input.note);
+    if (note !== null && note.length > MAX_NOTE_LENGTH) {
+      throw new Error(`Observação não pode ter mais de ${MAX_NOTE_LENGTH} caracteres`);
+    }
+
     const game = new Game(name, "want_to_play");
-    game.genre = input.genre ?? null;
+    game.genre = genre;
     game.releaseDate = input.releaseDate ?? null;
     game.priceInCents = input.priceInCents ?? null;
-    game.note = input.note ?? null;
+    game.note = note;
     return game;
   }
 }
