@@ -79,4 +79,9 @@ describe("Game", () => {
     expect(() => Game.create({ name: "Hades", priceInCents: -1 })).toThrow();
   });
 
+  it("ADD-9: Valor zero é aceito como gratuito", () => {
+    const game = Game.create({ name: "Hades", priceInCents: 0 });
+    expect(game.priceInCents).toBe(0);
+  });  
+
 });
