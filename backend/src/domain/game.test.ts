@@ -121,4 +121,9 @@ describe("Game", () => {
     expect(() => game.changeStatus("playin" as GameStatus)).toThrow();
   });
 
+  it("STS-6: Mudar para o mesmo status atual é recusado", () => {
+    const game = Game.create({ name: "Hades" });
+    expect(() => game.changeStatus("want_to_play")).toThrow();
+  });    
+
 });

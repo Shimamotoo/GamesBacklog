@@ -91,6 +91,10 @@ export class Game {
     if (!GAME_STATUSES.includes(newStatus)) {
       throw new Error("Status inválido");
     }
+    
+    if (newStatus === this.status) {
+      throw new Error("Não é possível mudar para o mesmo status atual");
+    }
     this.status = newStatus;
   }
 }
