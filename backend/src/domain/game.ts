@@ -22,6 +22,14 @@ function cleanOptionalText(value: string | undefined): string | null {
   return cleaned === "" ? null : cleaned;
 }
 
+function isValidIsoDate(value: string): boolean {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+  return date.toISOString().slice(0, 10) === value;
+}
+
 export class Game {
   readonly name: string;
   readonly status: GameStatus;
@@ -63,9 +71,14 @@ export class Game {
       throw new Error("Valor não pode ter frações de centavo");
     }
 
+    const releaseDate = input.releaseDate ?? null;
+    if (releaseDate !== null && !isValidIsoDate(releaseDate)) {
+      throw new Error("Data de lançamento inválida");
+    }    
+
     const game = new Game(name, "want_to_play");
     game.genre = genre;
-    game.releaseDate = input.releaseDate ?? null;
+    game.releaseDate = releaseDate;
     game.priceInCents = priceInCents;
     game.note = note;
     return game;

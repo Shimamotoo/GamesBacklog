@@ -93,4 +93,13 @@ describe("Game", () => {
     expect(game.priceInCents).toBe(3999);
   }); 
 
+  it("ADD-15: Data de lançamento inválida é recusada", () => {
+    expect(() => Game.create({ name: "Hades", releaseDate: "2027-02-31" })).toThrow();
+  });  
+
+  it("ADD-8: Valor omitido fica não informado (null)", () => {
+    const game = Game.create({ name: "Hades" });
+    expect(game.priceInCents).toBeNull();
+  });
+
 });
