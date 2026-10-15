@@ -32,7 +32,7 @@ function isValidIsoDate(value: string): boolean {
 
 export class Game {
   readonly name: string;
-  readonly status: GameStatus;
+  status: GameStatus;
   genre: string | null = null;
   releaseDate: string | null = null;
   priceInCents: number | null = null;
@@ -82,5 +82,9 @@ export class Game {
     game.priceInCents = priceInCents;
     game.note = note;
     return game;
+  }
+
+  changeStatus(newStatus: GameStatus): void {
+    this.status = newStatus;
   }
 }

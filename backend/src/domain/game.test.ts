@@ -102,4 +102,10 @@ describe("Game", () => {
     expect(game.priceInCents).toBeNull();
   });
 
+  it("STS-1: status pode ser alterado para qualquer um dos cinco válidos", () => {
+    const game = Game.create({ name: "Hades" });
+    game.changeStatus("playing");
+    expect(game.status).toBe("playing");
+  });  
+
 });
