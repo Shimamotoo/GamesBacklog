@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { Game } from "./game";
+import { Game, type GameStatus } from "./game";
 
 describe("Game", () => {
 
@@ -115,5 +115,10 @@ describe("Game", () => {
     game.changeStatus("want_to_play");
     expect(game.status).toBe("want_to_play");
   });  
+
+  it("STS-4: Status fora dos cinco válidos é recusado", () => {
+    const game = Game.create({ name: "Hades" });
+    expect(() => game.changeStatus("playin" as GameStatus)).toThrow();
+  });
 
 });

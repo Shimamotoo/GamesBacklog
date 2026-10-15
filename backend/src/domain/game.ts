@@ -1,9 +1,12 @@
-export type GameStatus =
-  | "want_to_play"
-  | "playing"
-  | "completed"
-  | "paused"
-  | "dropped";
+export const GAME_STATUSES = [
+  "want_to_play",
+  "playing",
+  "completed",
+  "paused",
+  "dropped",
+] as const;
+
+export type GameStatus = (typeof GAME_STATUSES)[number];
 
 export type CreateGameInput = {
   name: string;
@@ -85,6 +88,9 @@ export class Game {
   }
 
   changeStatus(newStatus: GameStatus): void {
+    if (!GAME_STATUSES.includes(newStatus)) {
+      throw new Error("Status inválido");
+    }
     this.status = newStatus;
   }
 }
