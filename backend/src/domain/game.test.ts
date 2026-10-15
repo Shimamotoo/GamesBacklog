@@ -86,6 +86,11 @@ describe("Game", () => {
 
   it("ADD-11: Valor com mais de duas casas decimais é recusado", () => {
     expect(() => Game.create({ name: "Hades", priceInCents: 1.5 })).toThrow();
-  });  
+  }); 
+
+  it("ADD-11(II): Valor inteiro de centavos é aceito", () => {
+    const game = Game.create({ name: "Hades", priceInCents: 3999 });
+    expect(game.priceInCents).toBe(3999);
+  }); 
 
 });
