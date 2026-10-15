@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { Game } from "./game";
+import { Game, type GameStatus } from "./game";
 
 describe("Game", () => {
 
@@ -61,16 +61,27 @@ describe("Game", () => {
     expect(() => Game.create({ name: "Hades", note: "A".repeat(301) })).toThrow();
   });
 
-  it("ADD-13(II): Observação só com espaços vira não informada", () => {
+  it("ADD-13(II): Observação com até 300 caracteres é permitida", () => {
+    const game = Game.create({ name: "Hades", note: "A".repeat(300) });
+    expect(game.note).toBe("A".repeat(300));
+  });
+
+  it("ADD-13(III): Observação só com espaços vira não informada", () => {
     const game = Game.create({ name: "Hades", note: "      " });
     expect(game.note).toBeNull();
   });
 
-  it("ADD-14: Gênero com mais de 30 caracteres é recusado", () => {
-    expect(() => Game.create({ name: "Hades", genre: "A".repeat(31) })).toThrow();
+  it("ADD-14: Gênero com com até 30 caracteres é permitida", () => {
+    const game = Game.create({ name: "Hades", genre: "A".repeat(30) });
+    expect(game.genre).toBe("A".repeat(30));
   });
 
   it("ADD-14(II): Gênero com espaços nas pontas é salvo sem eles", () => {
+    const game = Game.create({ name: "Hades", genre: "  Terror  " });
+    expect(game.genre).toBe("Terror");
+  });
+
+  it("ADD-14(III): Gênero com espaços nas pontas é salvo sem eles", () => {
     const game = Game.create({ name: "Hades", genre: "  Terror  " });
     expect(game.genre).toBe("Terror");
   });
@@ -101,5 +112,29 @@ describe("Game", () => {
     const game = Game.create({ name: "Hades" });
     expect(game.priceInCents).toBeNull();
   });
+
+  it("STS-1: Status pode ser alterado para qualquer um dos cinco válidos", () => {
+    const game = Game.create({ name: "Hades" });
+    game.changeStatus("playing");
+    expect(game.status).toBe("playing");
+  });  
+
+  it("STS-2: Mudanças entre status diferentes são permitidas, inclusive voltar", () => {
+    const game = Game.create({ name: "Hades" });
+    game.changeStatus("playing");
+    game.changeStatus("dropped");
+    game.changeStatus("want_to_play");
+    expect(game.status).toBe("want_to_play");
+  });  
+
+  it("STS-4: Status fora dos cinco válidos é recusado", () => {
+    const game = Game.create({ name: "Hades" });
+    expect(() => game.changeStatus("playin" as GameStatus)).toThrow();
+  });
+
+  it("STS-6: Mudar para o mesmo status atual é recusado", () => {
+    const game = Game.create({ name: "Hades" });
+    expect(() => game.changeStatus("want_to_play")).toThrow();
+  });    
 
 });

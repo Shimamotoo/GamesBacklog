@@ -1,9 +1,12 @@
-export type GameStatus =
-  | "want_to_play"
-  | "playing"
-  | "completed"
-  | "paused"
-  | "dropped";
+export const GAME_STATUSES = [
+  "want_to_play",
+  "playing",
+  "completed",
+  "paused",
+  "dropped",
+] as const;
+
+export type GameStatus = (typeof GAME_STATUSES)[number];
 
 export type CreateGameInput = {
   name: string;
@@ -32,7 +35,7 @@ function isValidIsoDate(value: string): boolean {
 
 export class Game {
   readonly name: string;
-  readonly status: GameStatus;
+  status: GameStatus;
   genre: string | null = null;
   releaseDate: string | null = null;
   priceInCents: number | null = null;
@@ -82,5 +85,16 @@ export class Game {
     game.priceInCents = priceInCents;
     game.note = note;
     return game;
+  }
+
+  changeStatus(newStatus: GameStatus): void {
+    if (!GAME_STATUSES.includes(newStatus)) {
+      throw new Error("Status inválido");
+    }
+    
+    if (newStatus === this.status) {
+      throw new Error("Não é possível mudar para o mesmo status atual");
+    }
+    this.status = newStatus;
   }
 }
