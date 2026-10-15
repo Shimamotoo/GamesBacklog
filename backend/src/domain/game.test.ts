@@ -75,4 +75,8 @@ describe("Game", () => {
     expect(game.genre).toBe("Terror");
   });
 
+  it("ADD-10: Valor negativo é recusado", () => {
+    expect(() => Game.create({ name: "Hades", priceInCents: -1 })).toThrow();
+  });
+
 });

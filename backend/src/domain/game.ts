@@ -54,10 +54,15 @@ export class Game {
       throw new Error(`Observação não pode ter mais de ${MAX_NOTE_LENGTH} caracteres`);
     }
 
+    const priceInCents = input.priceInCents ?? null;
+    if (priceInCents !== null && priceInCents < 0) {
+      throw new Error("Valor não pode ser negativo");
+    }    
+
     const game = new Game(name, "want_to_play");
     game.genre = genre;
     game.releaseDate = input.releaseDate ?? null;
-    game.priceInCents = input.priceInCents ?? null;
+    game.priceInCents = priceInCents;
     game.note = note;
     return game;
   }
