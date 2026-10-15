@@ -84,4 +84,8 @@ describe("Game", () => {
     expect(game.priceInCents).toBe(0);
   });  
 
+  it("ADD-11: Valor com mais de duas casas decimais é recusado", () => {
+    expect(() => Game.create({ name: "Hades", priceInCents: 1.5 })).toThrow();
+  });  
+
 });

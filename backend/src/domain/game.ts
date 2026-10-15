@@ -57,7 +57,11 @@ export class Game {
     const priceInCents = input.priceInCents ?? null;
     if (priceInCents !== null && priceInCents < 0) {
       throw new Error("Valor não pode ser negativo");
-    }    
+    }
+    
+    if (priceInCents !== null && !Number.isInteger(priceInCents)) {
+      throw new Error("Valor não pode ter frações de centavo");
+    }
 
     const game = new Game(name, "want_to_play");
     game.genre = genre;
