@@ -102,10 +102,18 @@ describe("Game", () => {
     expect(game.priceInCents).toBeNull();
   });
 
-  it("STS-1: status pode ser alterado para qualquer um dos cinco válidos", () => {
+  it("STS-1: Status pode ser alterado para qualquer um dos cinco válidos", () => {
     const game = Game.create({ name: "Hades" });
     game.changeStatus("playing");
     expect(game.status).toBe("playing");
+  });  
+
+  it("STS-2: Mudanças entre status diferentes são permitidas, inclusive voltar", () => {
+    const game = Game.create({ name: "Hades" });
+    game.changeStatus("playing");
+    game.changeStatus("dropped");
+    game.changeStatus("want_to_play");
+    expect(game.status).toBe("want_to_play");
   });  
 
 });
