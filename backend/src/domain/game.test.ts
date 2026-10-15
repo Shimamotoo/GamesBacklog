@@ -75,4 +75,22 @@ describe("Game", () => {
     expect(game.genre).toBe("Terror");
   });
 
+  it("ADD-10: Valor negativo é recusado", () => {
+    expect(() => Game.create({ name: "Hades", priceInCents: -1 })).toThrow();
+  });
+
+  it("ADD-9: Valor zero é aceito como gratuito", () => {
+    const game = Game.create({ name: "Hades", priceInCents: 0 });
+    expect(game.priceInCents).toBe(0);
+  });  
+
+  it("ADD-11: Valor com mais de duas casas decimais é recusado", () => {
+    expect(() => Game.create({ name: "Hades", priceInCents: 1.5 })).toThrow();
+  }); 
+
+  it("ADD-11(II): Valor inteiro de centavos é aceito", () => {
+    const game = Game.create({ name: "Hades", priceInCents: 3999 });
+    expect(game.priceInCents).toBe(3999);
+  }); 
+
 });
