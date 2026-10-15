@@ -34,6 +34,7 @@ function isValidIsoDate(value: string): boolean {
 }
 
 export class Game {
+  id: number | null = null;
   readonly name: string;
   status: GameStatus;
   genre: string | null = null;

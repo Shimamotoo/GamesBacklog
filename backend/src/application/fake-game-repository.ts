@@ -14,4 +14,11 @@ export class FakeGameRepository implements GameRepository {
   async save(ownerId: string, game: Game): Promise<void> {
     this.games.push({ ownerId, game });
   }
+
+  async findById(ownerId: string, id: number): Promise<Game | null> {
+    const found = this.games.find(
+      (entry) => entry.ownerId === ownerId && entry.game.id === id
+    );
+    return found?.game ?? null;
+  }
 }

@@ -23,5 +23,5 @@ describe("AddGame", () => {
 
         expect(first.name).toBe("Hades");
         expect(second.name).toBe("Hades II");
-    });
+    });  
 });
